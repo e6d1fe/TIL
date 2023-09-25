@@ -27,3 +27,15 @@ export default async function Page() {
   return <main></main>
 }
 ```
+
+## Caching
+
+기본 설정: `cache: 'force-cache'`  
+➡️ 자동으로 `fetch` 요청으로부터 응답받은 데이터 캐싱
+
+`cache: 'no-store'`  
+➡️ 캐싱하지 않도록 설정
+
+```
+fetch(`https://...`, { cache: 'no-store' })
+```
