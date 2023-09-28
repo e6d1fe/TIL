@@ -33,7 +33,8 @@ function handleChangeTask(task) {
 }
 ```
 
-이렇게 dispatch에 넘겨주는 객체를 action이라고 한다.
+이렇게 `dispatch`에 넘겨주는 객체를 action이라고 한다.  
+그리고 `dispatch`는 액션을 발생시키는 함수라고 이해하면 됨
 
 </p>
 <br>
@@ -44,6 +45,7 @@ function handleChangeTask(task) {
 state logic을 포함할 reducer 함수를 만든다.<br>
 2개의 매개변수가 필요하다. (현재 상태, action 객체)<br>
 reducer 함수로부터 리턴되는 것으로 state가 설정될 것이다.<br>
+여기서 `action`은 업데이트를 위한 정보를 가지고 있음
 
 예시 ⬇️
 
