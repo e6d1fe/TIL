@@ -18,6 +18,9 @@ React.createContext를 이용하면 새로운 context를 만들 수 있다.<br>
 const MyContext = React.createContext(defaultValue);
 ```
 
+`createContext`에 넘겨줄 default value가 딱히 없다면 `null`을 specify해줘야 한다.  
+⭐️ **context는 반드시 컴포넌트 밖에서 생성해야 한다!**
+
 <br>
 
 ### useContext
@@ -31,8 +34,6 @@ function ExampleComponent() {
 }
 ```
 
-⭐️ context는 반드시 컴포넌트 밖에서 생성해야 한다!
-
 <br>
 
 ### context 사용하기
@@ -43,6 +44,35 @@ function ExampleComponent() {
 4. context가 필요한 컴포넌트에서 useContext를 사용해 받아오기
 
 <br>
+
+```
+// App.js
+
+import { createContext, useState } from 'react';
+
+const ThemeContext = createContext('light');
+
+function App() {
+    const [theme, setTheme] = useState('light');
+
+    return (
+        <ThemeContext.Provider value={theme}>
+            <Page />
+        </ThemeContext.Provider>
+    )
+}
+```
+
+```
+// Button.js
+
+import { ThemeContext } from './App.js';
+
+function Button() {
+    const theme = useContext(ThemeContext);
+    // ...
+}
+```
 
 참고
 
