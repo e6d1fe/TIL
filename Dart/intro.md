@@ -42,7 +42,7 @@ while (year < 2016) {
 
 #### Functions
 
-Specifying the types of each function's arguments and return value is recomended.
+Specifying the types of each function's arguments and return value is recommended.
 
 #### Comments
 
