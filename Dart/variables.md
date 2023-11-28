@@ -32,3 +32,44 @@ void main() {
 ```
 
 위처럼 `var dnm;`이라고 하지 않고 `dynamic dnm;`처럼 dynamic이라는 걸 명시해 줄 수도 있음
+
+#### Nullable Variables
+
+blocking references to `null`
+
+```dart
+// without null safety
+bool isEmpty(String string) => string.length == 0;
+
+main() {
+    isEmpty(null); // runtime error - NoSuchMethodError
+}
+```
+
+dart에서는 어떤 변수가 `null`이 될 수 있는지 명확히 표시해야 함
+
+```dart
+void main() {
+  String? nico = 'nico';
+  nico = null;
+}
+```
+
+이렇게 타입 선언 키워드 끝에 `?`를 붙여 주면 `null`도 할당 가능한 변수가 됨  
+그러면 컴파일러가 해당 변수의 값이 `null`이 될 수 있음을 알고 `String.length` 등의 메서드를 사용하기 전에 확인
+
+```dart
+void main() {
+  String? nico = 'nico';
+  nico = null;
+
+  if (nico != null) {
+    nico.length;
+  }
+
+  // same thing
+  nico?.length;
+}
+```
+
+All variables are non-nullable by default
