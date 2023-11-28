@@ -73,3 +73,90 @@ void main() {
 ```
 
 All variables are non-nullable by default
+
+https://dart.dev/language/variables
+
+Variables store **references**.
+
+```dart
+var name = 'Bob';
+
+Object name = 'Bob';
+
+String name = 'Bob';
+```
+
+This variable called `name` contains a reference to a `String` object with a value of `'Bob'`.  
+Its type is inferred to be a `String`, but you can change that by specifying it.  
+If an object isn't restricted to a single type, specify the `Object` type or `dynamic` if necessary.  
+Another option is to explicitly declare the type.
+
+#### Null Safety
+
+Null safety prevents an error that results from unintentional access of variables set to `null`.  
+A null dereference error occurs when you access a property or call a method on an expression that evaluates to `null`.  
+With null safety, **the Dart compiler detects these potential errors at compile time**.
+
+1. When you specify a type for a variable, parameter, or another relevant component, you can control whether the type allows `null`. To enable nullability, you add a `?` to the end of the type declaration.
+2. You must intialize variables before using them. **Nullable variables default to `null`**, so they are initialized by default.
+3. You can't access properties or call methods on an expression with a nullable type. The same exception applies where it's a property or method that `null` supports like `hashCode` or `toString()`.
+
+#### Default Value
+
+Uninitialized variables that have a nullable type have an initial value of `null`.  
+Even variables with numeric types are initially null, because numbers (like everything else in Dart) are objects.  
+With null safety, you must initialize the values of non-nullable variables before you use them:
+
+```dart
+int? lineCount1;
+
+int lineCount2 = 0;
+```
+
+**You don't have to initialize a local variable where it's declared, but you do need to assign it a value before it's used.**
+
+#### Late Variables
+
+The `late` modifier has two use cases:
+
+1. Declaring a non-nullable variable that's initialized after its declaration.
+2. Lazily initializing a variable.
+
+If you're sure that a variable is set before it's used, but Dart disagrees, you can fix the error by marking the variable as `late`:
+
+```dart
+late String description;
+
+void main() {
+    description = 'Feijoada!';
+    print(description);
+}
+```
+
+If `description` above is not set as `late`, the following error appears: `The non-nullable variable 'description' must be initialized.`  
+**If you fail to initialize a `late` variable, a runtime error occurs when the variable is used.**  
+When you mark a variable as `late` but initialize it at its declaration, then the initializer runs **the first time the variable is used**.  
+This lazy initialization is handy in a couple of cases:
+
+1. The variable might not be needed right now, and initializing it is costly.
+2. You're initializing an instance variable, and its initializer needs access to `this`.
+
+In the following example, if the `temperature` variable is never used, then the expensive `readThermometer()` function is never called:
+
+```dart
+late String temperature = readThermometer(); // lazily initialized
+```
+
+#### Final and Const
+
+If you never intend to change a variable, use `final` or `const` instead of `var` or in addition to a type.  
+A final variable can be set only once; a const variable is a compile-time constant.
+
+```dart
+final name = 'Bob'; // without a type annotation
+final String nickname = 'Bobby';
+```
+
+Use `const` for variables that you want to be compile-time constants.  
+If the const variable is at the class level, mark it `static const`.  
+You can also use the `const` keyword for creatinc constant values, as well as to declare constructors that create constant values.
